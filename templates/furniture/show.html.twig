@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Le MEUBLE</h1>
+    <h1>{{ furniture.name }}</h1>
+    <p>Nombre de création : {{ furniture.craftNumber }}</p>
+    <h2>Catégories</h2>
 {% endblock %}

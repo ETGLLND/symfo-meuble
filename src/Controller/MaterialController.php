@@ -16,7 +16,7 @@ class MaterialController extends AbstractController
     {
         $material = $materialRepository->find($id);
 
-        return $this->render('material/index.html.twig', [
+        return $this->render('material/show.html.twig', [
             'material' => $material
         ]);
     }

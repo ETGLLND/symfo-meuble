@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Material;
+use App\Repository\MaterialRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+class MaterialController extends AbstractController
+{
+    /**
+     * @Route("/material/{id}", name="home")
+     */
+    public function index(MaterialRepository $materialRepository, int $id)
+    {
+        $material = $materialRepository->find($id);
+
+        return $this->render('material/index.html.twig', [
+            'material' => $material
+        ]);
+    }
+}

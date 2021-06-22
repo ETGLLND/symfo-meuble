@@ -16,7 +16,7 @@ class FurnitureController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Furniture::class);
         $furniture = $repository->find($id);
-        return $this->render("furniture/show.html.twig", [
+        return $this->render("furniture/index.html.twig", [
             "furniture" => $furniture
         ]);
     }

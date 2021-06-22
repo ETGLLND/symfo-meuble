@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<h1>Liste des meubles existants</h1>
+
+	<div class="row">
+		<div class="col">
+			<table class="table">
+				<thead>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>Nombre de création</th>
+				</thead>
+				<tbody>
+					{% for f in furnitures %}
+						<tr>
+							<td>{{ f.id }}</td>
+							<td>{{ f.name}}</td>
+							<td>{{ f.craftNumber }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock %}

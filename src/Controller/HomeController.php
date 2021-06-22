@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Repository\FurnitureRepository;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {

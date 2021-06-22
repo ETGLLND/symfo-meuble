@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Fournisseur</h1>
+    <h1>{{ supplier.name }}</h1>
+    <h2>Productions</h2>
+    <ul>
+        {% for material in supplier.materials %}
+            <li>{{ material.name }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

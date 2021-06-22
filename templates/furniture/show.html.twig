@@ -3,5 +3,11 @@
 {% block body %}
     <h1>{{ furniture.name }}</h1>
     <p>Nombre de création : {{ furniture.craftNumber }}</p>
-    <h2>Catégories</h2>
+    <h2>Catégorie : {{ furniture.category.name }}</h2>
+    <h2>Matériaux</h2>
+    <ul>
+    {% for material in furniture.material %}
+        <li>{{ material.name }}</li>
+    {% endfor %}
+    </ul>
 {% endblock %}

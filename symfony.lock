@@ -283,9 +283,6 @@
             "./templates/base.html.twig"
         ]
     },
-    "symfony/twig-pack": {
-        "version": "v1.0.1"
-    },
     "symfony/var-dumper": {
         "version": "v5.3.2"
     },

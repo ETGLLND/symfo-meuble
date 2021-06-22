@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Furniture;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +10,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class FurnitureController extends AbstractController
 {
     /**
-     * @Route("/furniture", name="furniture")
+     * @Route("/furniture/{id}", name="furniture")
      */
-    public function index(): Response
+    public function index(int $id): Response
     {
-        return $this->render("furniture/show.html.twig");
+        $repository = $this->getDoctrine()->getRepository(Furniture::class);
+        $furniture = $repository->find($id);
+        return $this->render("furniture/show.html.twig", [
+            "furniture" => $furniture
+        ]);
     }
 }

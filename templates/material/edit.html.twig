@@ -2,15 +2,14 @@
 
 {% block body %}
 	<h1>{{ material.name }}</h1>
-	<p>Description :
-		{% if material.description %}
-			{{ material.description }}
-		{% else %}
-			<i>Aucune</i>
-		{% endif %}
-	</p>
-	<h2>Fournisseur :
-		{{ material.supplier.name }}</h2>
+	{{ form_start(form) }}
+
+	{{ form_widget(form) }}
+
+	<button>Enregistrer</button>
+
+	{{ form_end(form) }}
+	<a href="{{ path('delete_material', {'id': material.id}) }}" class="btn btn-danger btn-sm ml-1">Supprimer</a>
 	<h2>Ce matériau est utilisé pour</h2>
 	<ul>
 		{% for f in material.furniture %}

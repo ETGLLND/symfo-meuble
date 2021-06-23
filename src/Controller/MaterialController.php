@@ -13,14 +13,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class MaterialController extends AbstractController
 {
     /**
-     * @Route("/material/{id}/show", name="show_material")
+     * @Route("/material/{id}/edit", name="edit_material")
      */
-    public function index(MaterialRepository $materialRepository, int $id)
+    public function index(Request $request, EntityManagerInterface $em, MaterialRepository $materialRepository, int $id)
     {
         $material = $materialRepository->find($id);
 
-        return $this->render('material/show.html.twig', [
-            'material' => $material
+        $form = $this->createForm(MaterialType::class, $material);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+        }
+
+        return $this->render("material/edit.html.twig", [
+            'material' => $material,
+            'form' => $form->createView()
         ]);
     }
 

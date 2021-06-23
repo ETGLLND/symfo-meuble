@@ -18,8 +18,8 @@ class SupplierType extends AbstractType
         ->add('name', TextType::class, [
             'label' => 'Nom du fournisseur : '
         ])
-        ->add('material', EntityType::class, [
-            'label' => 'Matériau produit par le fournisseur : ',
+        ->add('materials', EntityType::class, [
+            'label' => 'Matériaux produits par le fournisseur : ',
             'class' => Material::class,
             'choice_label' => 'name',
             'multiple' => true,

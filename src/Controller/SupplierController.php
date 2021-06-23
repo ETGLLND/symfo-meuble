@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Supplier;
+use App\Form\SupplierType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,6 +12,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SupplierController extends AbstractController
 {
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @Route("/supplier/{id}", name="supplier")
      */
@@ -28,19 +37,19 @@ class SupplierController extends AbstractController
      */
     public function add(Request $request)
     {
-        $form = $this->createForm(FurnitureType::class);
+        $form = $this->createForm(SupplierType::class);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $furniture = $form->getData();
-            $this->em->persist($furniture);
+            $supplier = $form->getData();
+            $this->em->persist($supplier);
             $this->em->flush();
 
             return $this->redirectToRoute("home");
         }
         
-        return $this->render("furniture/add.html.twig", [
+        return $this->render("supplier/add.html.twig", [
             "form" => $form->createView()
         ]);
     }

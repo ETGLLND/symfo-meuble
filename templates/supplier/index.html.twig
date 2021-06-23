@@ -8,4 +8,5 @@
             <li>{{ material.name }}</li>
         {% endfor %}
     </ul>
+    <a href="{{ path('supplier_edit', {id: supplier.id}) }}">Editer ce fournisseur</a>
 {% endblock %}

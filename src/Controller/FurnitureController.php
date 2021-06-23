@@ -54,28 +54,6 @@ class FurnitureController extends AbstractController
     }
 
     /**
-     * @Route("/furniture_update", name="furniture_update")
-     */
-    public function update(Request $request)
-    {
-        $form = $this->createForm(FurnitureType::class);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $furniture = $form->getData();
-            $this->em->persist($furniture);
-            $this->em->flush();
-
-            return $this->redirectToRoute("home");
-        }
-        
-        return $this->render("furniture/add.html.twig", [
-            "form" => $form->createView()
-        ]);
-    }
-
-    /**
      * @Route("/furniture/{id}/edit", name="furniture_edit")
      */
     public function edit(int $id, Request $request)
@@ -88,8 +66,8 @@ class FurnitureController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $furniture = $form->getData();
-            $this->em->persist($furniture);
+            $newFurniture = $form->getData();
+            $this->em->persist($newFurniture);
             $this->em->flush();
 
             return $this->redirectToRoute("furniture", ['id' => $id]);

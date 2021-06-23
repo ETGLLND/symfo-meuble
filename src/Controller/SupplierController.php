@@ -26,7 +26,6 @@ class SupplierController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Supplier::class);
         $supplier = $repository->find($id);
-
         return $this->render('supplier/index.html.twig', [
             'supplier' => $supplier,
         ]);
@@ -51,6 +50,32 @@ class SupplierController extends AbstractController
         
         return $this->render("supplier/add.html.twig", [
             "form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/supplier/{id}/edit", name="supplier_edit")
+     */
+    public function edit(int $id, Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Supplier::class);
+        $supplier = $repository->find($id);
+
+        $form = $this->createForm(SupplierType::class, $supplier);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $newSupplier = $form->getData();
+            $this->em->persist($newSupplier);
+            $this->em->flush();
+
+            return $this->redirectToRoute("supplier", ['id' => $id]);
+        }
+
+        return $this->render("supplier/edit.html.twig", [
+            "form" => $form->createView(),
+            "supplier" => $supplier
         ]);
     }
 }

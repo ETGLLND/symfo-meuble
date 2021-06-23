@@ -10,4 +10,5 @@
         <li>{{ material.name }}</li>
     {% endfor %}
     </ul>
+    <a href="{{ path('furniture_edit', {id: furniture.id}) }}">Editer ce meuble</a>
 {% endblock %}

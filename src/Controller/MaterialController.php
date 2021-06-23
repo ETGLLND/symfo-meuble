@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MaterialController extends AbstractController
 {
     /**
-     * @Route("/material/{id}", name="home")
+     * @Route("/material/{id}", name="show_material")
      */
     public function index(MaterialRepository $materialRepository, int $id)
     {

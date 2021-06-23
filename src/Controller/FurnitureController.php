@@ -2,18 +2,23 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Furniture;
-use App\Entity\Material;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\FurnitureType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class FurnitureController extends AbstractController
 {
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @Route("/furniture/{id}", name="furniture")
      */
@@ -29,28 +34,19 @@ class FurnitureController extends AbstractController
     /**
      * @Route("/furniture_add", name="furniture_add")
      */
-    public function add()
+    public function add(Request $request)
     {
-        $form = $this->createFormBuilder(null, ['data_class' => Furniture::class])
-            ->add('name', TextType::class, [
-                'label' => 'Nom du meuble : '
-            ])
-            ->add('craft_number', IntegerType::class, [
-                'label' => 'Nombre de fois fabriqué : '
-            ])
-            ->add('category', EntityType::class, [
-                'label' => 'Catégorie du meuble : ',
-                'class' => Category::class,
-                'choice_label' => 'name'
-            ])
-            ->add('materials', EntityType::class, [
-                'label' => 'Matériau du meuble : ',
-                'class' => Material::class,
-                'choice_label' => 'name',
-                'multiple' => true,
-                'expanded' => true,
-            ])
-            ->getForm();
+        $form = $this->createForm(FurnitureType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $furniture = $form->getData();
+            $this->em->persist($furniture);
+            $this->em->flush();
+
+            return $this->redirectToRoute("home");
+        }
         
         return $this->render("furniture/add.html.twig", [
             "form" => $form->createView()

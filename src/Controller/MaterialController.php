@@ -51,4 +51,17 @@ class MaterialController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/material/{id}/delete", name="delete_material")
+     */
+    public function delete(Request $request, EntityManagerInterface $em, MaterialRepository $materialRepository, int $id)
+    {
+        $material = $materialRepository->find($id);
+
+        $em->remove($material);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
 }

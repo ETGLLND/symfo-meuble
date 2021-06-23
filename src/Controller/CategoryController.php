@@ -12,14 +12,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{id}/edit", name="show_category")
+     * @Route("/category/{id}/edit", name="edit_category")
      */
-    public function show(CategoryRepository $categoryRepository, int $id)
+    public function edit(Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository, int $id)
     {
         $category = $categoryRepository->find($id);
 
-        return $this->render('category/show.html.twig', [
-            'category' => $category
+        $form = $this->createForm(CategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+        }
+
+        return $this->render('category/edit.html.twig', [
+            'category' => $category,
+            'form' => $form->createView()
         ]);
     }
 
@@ -40,5 +49,18 @@ class CategoryController extends AbstractController
         return $this->render('category/new.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/category/{id}/delete", name="delete_category")
+     */
+    public function delete(Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository, int $id)
+    {
+        $category = $categoryRepository->find($id);
+
+        $em->remove($category);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
     }
 }

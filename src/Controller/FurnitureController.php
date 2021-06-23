@@ -52,4 +52,26 @@ class FurnitureController extends AbstractController
             "form" => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/furniture_update", name="furniture_update")
+     */
+    public function update(Request $request)
+    {
+        $form = $this->createForm(FurnitureType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $furniture = $form->getData();
+            $this->em->persist($furniture);
+            $this->em->flush();
+
+            return $this->redirectToRoute("home");
+        }
+        
+        return $this->render("furniture/add.html.twig", [
+            "form" => $form->createView()
+        ]);
+    }
 }

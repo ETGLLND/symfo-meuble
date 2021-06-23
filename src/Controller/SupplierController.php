@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Supplier;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SupplierController extends AbstractController
 {
@@ -19,6 +20,28 @@ class SupplierController extends AbstractController
 
         return $this->render('supplier/index.html.twig', [
             'supplier' => $supplier,
+        ]);
+    }
+
+    /**
+     * @Route("/supplier_add", name="supplier_add")
+     */
+    public function add(Request $request)
+    {
+        $form = $this->createForm(FurnitureType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $furniture = $form->getData();
+            $this->em->persist($furniture);
+            $this->em->flush();
+
+            return $this->redirectToRoute("home");
+        }
+        
+        return $this->render("furniture/add.html.twig", [
+            "form" => $form->createView()
         ]);
     }
 }

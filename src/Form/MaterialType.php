@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Material;
 use App\Entity\Supplier;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MaterialType extends AbstractType
@@ -30,5 +32,12 @@ class MaterialType extends AbstractType
                 'class' => Supplier::class,
                 'choice_label' => 'name'
             ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => Material::class
+        ]);
     }
 }

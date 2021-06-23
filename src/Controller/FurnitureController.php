@@ -100,4 +100,18 @@ class FurnitureController extends AbstractController
             "furniture" => $furniture
         ]);
     }
+
+    /**
+     * @Route("/furniture/{id}/delete", name="furniture_delete")
+     */
+    public function delete(int $id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Furniture::class);
+        $furniture = $repository->find($id);
+
+        $this->em->remove($furniture);
+        $this->em->flush();
+
+        return $this->redirectToRoute('home');
+    }
 }

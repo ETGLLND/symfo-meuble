@@ -11,4 +11,5 @@
     {% endfor %}
     </ul>
     <a href="{{ path('furniture_edit', {id: furniture.id}) }}">Editer ce meuble</a>
+    <a href="{{ path('furniture_delete', {id: furniture.id}) }}">Supprimer ce meuble</a>
 {% endblock %}

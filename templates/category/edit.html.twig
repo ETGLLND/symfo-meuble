@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<h1>Catégorie
+		{{ category.name }}</h1>
+	{{ form_start(form) }}
+
+	{{ form_widget(form) }}
+
+	<button>Modifier</button>
+
+	{{ form_end(form) }}
+	<a href="{{ path('delete_category', {'id': category.id}) }}" class="btn btn-danger btn-sm ml-1">Supprimer</a>
+	<h2>Cette catégorie comprend les créations suivantes :</h2>
+	<ul>
+		{% for c in category.furniture %}
+			<li>{{ c.name }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

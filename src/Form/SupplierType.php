@@ -15,16 +15,9 @@ class SupplierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('name', TextType::class, [
-            'label' => 'Nom du fournisseur : '
-        ])
-        ->add('materials', EntityType::class, [
-            'label' => 'Matériaux produits par le fournisseur : ',
-            'class' => Material::class,
-            'choice_label' => 'name',
-            'multiple' => true,
-            'expanded' => true,
-        ]);
+            ->add('name', TextType::class, [
+                'label' => 'Nom du fournisseur : '
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

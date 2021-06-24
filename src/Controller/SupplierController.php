@@ -20,7 +20,7 @@ class SupplierController extends AbstractController
     }
 
     /**
-     * @Route("/supplier/{id}", name="supplier")
+     * @Route("/supplier/{id}", name="supplier", requirements={"id"="\d+"})
      */
     public function index(int $id): Response
     {
@@ -40,14 +40,14 @@ class SupplierController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $supplier = $form->getData();
             $this->em->persist($supplier);
             $this->em->flush();
 
             return $this->redirectToRoute("home");
         }
-        
+
         return $this->render("supplier/add.html.twig", [
             "form" => $form->createView()
         ]);
@@ -65,7 +65,7 @@ class SupplierController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $newSupplier = $form->getData();
             $this->em->persist($newSupplier);
             $this->em->flush();
@@ -86,7 +86,7 @@ class SupplierController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Supplier::class);
         $supplier = $repository->find($id);
-        foreach($supplier->getMaterials() as $material) {
+        foreach ($supplier->getMaterials() as $material) {
             $supplier->removeMaterial($material);
         }
 

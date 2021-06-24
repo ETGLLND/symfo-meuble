@@ -17,24 +17,24 @@ class FurnitureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('name', TextType::class, [
-            'label' => 'Nom du meuble : '
-        ])
-        ->add('craft_number', IntegerType::class, [
-            'label' => 'Nombre de fois fabriqué : '
-        ])
-        ->add('category', EntityType::class, [
-            'label' => 'Catégorie du meuble : ',
-            'class' => Category::class,
-            'choice_label' => 'name'
-        ])
-        ->add('material', EntityType::class, [
-            'label' => 'Matériau du meuble : ',
-            'class' => Material::class,
-            'choice_label' => 'name',
-            'multiple' => true,
-            'expanded' => true,
-        ]);
+            ->add('name', TextType::class, [
+                'label' => 'Nom du meuble : '
+            ])
+            ->add('craft_number', IntegerType::class, [
+                'label' => 'Nombre de fois fabriqué : '
+            ])
+            ->add('category', EntityType::class, [
+                'label' => 'Catégorie du meuble : ',
+                'class' => Category::class,
+                'choice_label' => 'name'
+            ])
+            ->add('material', EntityType::class, [
+                'label' => 'Matériau du meuble : ',
+                'class' => Material::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

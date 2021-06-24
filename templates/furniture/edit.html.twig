@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
+{% block title %}
+	Editer -
+	{{ furniture.name }}
+{% endblock %}
 
 {% block body %}
-    <h1>{{ furniture.name }}</h1>
+	<h1>{{ furniture.name }}</h1>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-        <button>Enregistrer</button>
-    {{ form_end(form) }}
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button class="btn btn-success">Enregistrer</button>
+	{{ form_end(form) }}
 {% endblock %}

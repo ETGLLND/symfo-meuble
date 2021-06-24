@@ -40,14 +40,14 @@ class FurnitureController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $furniture = $form->getData();
             $this->em->persist($furniture);
             $this->em->flush();
 
             return $this->redirectToRoute("home");
         }
-        
+
         return $this->render("furniture/add.html.twig", [
             "form" => $form->createView()
         ]);
@@ -65,7 +65,7 @@ class FurnitureController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $newFurniture = $form->getData();
             $this->em->persist($newFurniture);
             $this->em->flush();

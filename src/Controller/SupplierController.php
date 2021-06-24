@@ -78,4 +78,21 @@ class SupplierController extends AbstractController
             "supplier" => $supplier
         ]);
     }
+
+    /**
+     * @Route("/supplier/{id}/delete", name="supplier_delete")
+     */
+    public function delete(int $id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Supplier::class);
+        $supplier = $repository->find($id);
+        foreach($supplier->getMaterials() as $material) {
+            $supplier->removeMaterial($material);
+        }
+
+        $this->em->remove($supplier);
+        $this->em->flush();
+
+        return $this->redirectToRoute('home');
+    }
 }

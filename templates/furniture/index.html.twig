@@ -1,15 +1,23 @@
 {% extends "base.html.twig" %}
-
+{% block title %}
+	{{ furniture.name }}
+{% endblock %}
 {% block body %}
-    <h1>{{ furniture.name }}</h1>
-    <p>Nombre de création : {{ furniture.craftNumber }}</p>
-    <h2>Catégorie : {{ furniture.category.name }}</h2>
-    <h2>Matériaux</h2>
-    <ul>
-    {% for material in furniture.material %}
-        <li>{{ material.name }}</li>
-    {% endfor %}
-    </ul>
-    <a href="{{ path('furniture_edit', {id: furniture.id}) }}">Editer ce meuble</a>
-    <a href="{{ path('furniture_delete', {id: furniture.id}) }}">Supprimer ce meuble</a>
+	<h1>{{ furniture.name }}</h1>
+	<p>Nombre de création :
+		{{ furniture.craftNumber }}</p>
+	<h2>Catégorie :
+		{{ furniture.category.name }}</h2>
+	<h3>Matériaux</h3>
+	<ul>
+		{% for material in furniture.material %}
+			<li class="mb-2">
+				<a class="btn btn-light" href="{{ path('material', {id: material.id}) }}">
+					{{ material.name }}
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+	<a class="btn btn-success" href="{{ path('furniture_edit', {id: furniture.id}) }}">Editer ce meuble</a>
+	<a class="btn btn-danger" href="{{ path('furniture_delete', {id: furniture.id}) }}">Supprimer ce meuble</a>
 {% endblock %}

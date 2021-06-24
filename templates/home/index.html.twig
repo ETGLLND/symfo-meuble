@@ -3,6 +3,8 @@
 {% block body %}
 	<h1>Liste des meubles existants</h1>
 
+	<button type="button" class="btn btn-secondary">Ajouter un nouveau meuble</button>
+
 	<div class="row">
 		<div class="col">
 			<table class="table">
@@ -10,13 +12,19 @@
 					<th>Id</th>
 					<th>Nom</th>
 					<th>Nombre de création</th>
+					<th></th>
 				</thead>
 				<tbody>
 					{% for f in furnitures %}
 						<tr>
 							<td>{{ f.id }}</td>
-							<td>{{ f.name}}</td>
+							<td>
+								<a class="btn btn-primary btn-sm" href="{{ path('furniture', {'id': f.id}) }}">{{ f.name}}</a>
+							</td>
 							<td>{{ f.craftNumber }}</td>
+							<td>
+								<a href="{{ path('furniture_edit', {'id': f.id}) }}" class="btn btn-success">Modifier</a>
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>

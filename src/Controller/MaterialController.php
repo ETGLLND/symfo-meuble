@@ -13,9 +13,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class MaterialController extends AbstractController
 {
     /**
+     * @Route("/material/{id}", name="material")
+     */
+    public function index(int $id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Material::class);
+        $material = $repository->find($id);
+        return $this->render('material/index.html.twig', [
+            'material' => $material,
+        ]);
+    }
+
+    /**
      * @Route("/material/{id}/edit", name="edit_material")
      */
-    public function index(Request $request, EntityManagerInterface $em, MaterialRepository $materialRepository, int $id)
+    public function edit(Request $request, EntityManagerInterface $em, MaterialRepository $materialRepository, int $id)
     {
         $material = $materialRepository->find($id);
 

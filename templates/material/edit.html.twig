@@ -6,10 +6,9 @@
 
 	{{ form_widget(form) }}
 
-	<button>Enregistrer</button>
+	<button type="submit" class="btn btn-success">Enregistrer</button>
 
 	{{ form_end(form) }}
-	<a href="{{ path('delete_material', {'id': material.id}) }}" class="btn btn-danger btn-sm ml-1">Supprimer</a>
 	<h2>Ce matériau est utilisé pour</h2>
 	<ul>
 		{% for f in material.furniture %}

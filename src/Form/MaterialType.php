@@ -24,7 +24,7 @@ class MaterialType extends AbstractType
             ->add('description', TextType::class, [
                 'label' => 'Description',
                 'attr' => [
-                    'placeholder' => 'Déscription du matériau'
+                    'placeholder' => 'Description du matériau'
                 ]
             ])
             ->add('supplier', EntityType::class, [

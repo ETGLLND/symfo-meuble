@@ -9,10 +9,4 @@
 	<button type="submit" class="btn btn-success">Enregistrer</button>
 
 	{{ form_end(form) }}
-	<h2>Ce matériau est utilisé pour</h2>
-	<ul>
-		{% for f in material.furniture %}
-			<li>{{ f.name }}</li>
-		{% endfor %}
-	</ul>
 {% endblock %}

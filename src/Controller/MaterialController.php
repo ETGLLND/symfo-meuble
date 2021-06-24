@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MaterialController extends AbstractController
 {
     /**
-     * @Route("/material/{id}", name="material")
+     * @Route("/material/{id<\d+>}", name="material", )
      */
     public function index(int $id)
     {

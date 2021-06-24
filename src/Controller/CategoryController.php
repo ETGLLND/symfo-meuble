@@ -56,7 +56,7 @@ class CategoryController extends AbstractController
             $em->persist($form->getData());
             $em->flush();
 
-            return $this->redirect($request->getUri());
+            return $this->redirectToRoute('category_list');
         }
 
         return $this->render('category/new.html.twig', [
@@ -74,13 +74,13 @@ class CategoryController extends AbstractController
         $em->remove($category);
         $em->flush();
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('category_list');
     }
 
     /**
      * @Route("/categories", name="category_list")
      */
-    public function list(CategoryRepository $categoryRepository, int $id)
+    public function list(CategoryRepository $categoryRepository)
     {
         $categories = $categoryRepository->findAll();
 

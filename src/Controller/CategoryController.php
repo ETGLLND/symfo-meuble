@@ -12,6 +12,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
     /**
+     * @Route("/category/{id}", name="category", requirements={"id"="\d+"})
+     */
+    public function index(CategoryRepository $categoryRepository, int $id)
+    {
+        $category = $categoryRepository->find($id);
+
+        return $this->render('category/index.html.twig', [
+            'category' => $category
+        ]);
+    }
+    /**
      * @Route("/category/{id}/edit", name="edit_category")
      */
     public function edit(Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository, int $id)
@@ -24,6 +35,8 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+
+            return $this->redirectToRoute("category", ['id' => $id]);
         }
 
         return $this->render('category/edit.html.twig', [

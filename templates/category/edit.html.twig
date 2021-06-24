@@ -1,4 +1,8 @@
 {% extends "base.html.twig" %}
+{% block title %}
+	Editer -
+	{{ category.name }}
+{% endblock %}
 
 {% block body %}
 	<h1>Catégorie
@@ -7,14 +11,7 @@
 
 	{{ form_widget(form) }}
 
-	<button>Modifier</button>
+	<button class="btn btn-success mt-2">Enregistrer</button>
 
 	{{ form_end(form) }}
-	<a href="{{ path('delete_category', {'id': category.id}) }}" class="btn btn-danger btn-sm ml-1">Supprimer</a>
-	<h2>Cette catégorie comprend les créations suivantes :</h2>
-	<ul>
-		{% for c in category.furniture %}
-			<li>{{ c.name }}</li>
-		{% endfor %}
-	</ul>
 {% endblock %}

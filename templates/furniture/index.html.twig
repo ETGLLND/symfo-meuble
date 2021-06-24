@@ -7,7 +7,9 @@
 	<p>Nombre de création :
 		{{ furniture.craftNumber }}</p>
 	<h2>Catégorie :
-		{{ furniture.category.name }}</h2>
+		<a href="{{ path('category', {id: furniture.category.id}) }}" class="btn btn-info">
+			{{ furniture.category.name }}</a>
+	</h2>
 	<h3>Matériaux</h3>
 	<ul>
 		{% for material in furniture.material %}

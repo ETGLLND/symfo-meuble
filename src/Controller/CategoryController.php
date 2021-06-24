@@ -76,4 +76,16 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
+    /**
+     * @Route("/categories", name="category_list")
+     */
+    public function list(CategoryRepository $categoryRepository, int $id)
+    {
+        $categories = $categoryRepository->findAll();
+
+        return $this->render('category/list.html.twig', [
+            'categories' => $categories
+        ]);
+    }
 }

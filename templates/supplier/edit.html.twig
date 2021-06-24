@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Editer - {{ supplier.name }}
+{% endblock %}
+
 {% block body %}
     <h1>{{ supplier.name }}</h1>
-
+    
     {{ form_start(form) }}
     {{ form_widget(form) }}
         <button type="submit" class="btn btn-success">Enregistrer</button>

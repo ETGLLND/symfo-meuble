@@ -37,6 +37,7 @@ class MaterialController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            return $this->redirectToRoute('material', ['id' => $id]);
         }
 
         return $this->render("material/edit.html.twig", [
@@ -67,7 +68,7 @@ class MaterialController extends AbstractController
     /**
      * @Route("/material/{id}/delete", name="delete_material")
      */
-    public function delete(Request $request, EntityManagerInterface $em, MaterialRepository $materialRepository, int $id)
+    public function delete(EntityManagerInterface $em, MaterialRepository $materialRepository, int $id)
     {
         $material = $materialRepository->find($id);
 

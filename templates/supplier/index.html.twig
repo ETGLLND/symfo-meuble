@@ -5,7 +5,7 @@
     <h2>Productions</h2>
     <ul>
         {% for material in supplier.materials %}
-            <li><a href="{{ path('material', {id: material.id}) }}">{{ material.name }}</a></li>
+            <li><a href="{{ path('material', {id: material.id}) }}" class="btn btn-light">{{ material.name }}</a></li>
         {% endfor %}
     </ul>
     <a href="{{ path('supplier_edit', {id: supplier.id}) }}" class="btn btn-success">Editer</a>

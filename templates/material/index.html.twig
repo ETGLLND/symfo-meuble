@@ -2,8 +2,17 @@
 
 {% block body %}
     <h1>{{ material.name }}</h1>
-    <h2>Productions</h2>
-    
+    <p>{{ material.description }}</p>
+    <h2>Fournis par :</h2>
+    <a href="{{ path('supplier', {id: material.supplier.id}) }}" class="btn btn-warning">{{ material.supplier.name }}</a>
+    <br>
+    <h2>Ce matériau est inclus dans :</h2>
+    <ul>
+    {% for furniture in material.furniture %}
+        <li><a href="{{ path('furniture', {id: furniture.id}) }}" class="btn btn-primary">{{ furniture.name }}</a></li>
+    {% endfor %}
+    </ul>
+    <hr>
     <a href="{{ path('edit_material', {id: material.id}) }}" class="btn btn-success">Editer</a>
     <a href="{{ path('delete_material', {id: material.id}) }}" class="btn btn-danger">Supprimer</a>
 {% endblock %}

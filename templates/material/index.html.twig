@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ material.name }}</h1>
+    <h2>Productions</h2>
+    
+    <a href="{{ path('edit_material', {id: material.id}) }}" class="btn btn-success">Editer</a>
+    <a href="{{ path('delete_material', {id: material.id}) }}" class="btn btn-danger">Supprimer</a>
+{% endblock %}

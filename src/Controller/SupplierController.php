@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Supplier;
 use App\Form\SupplierType;
+use App\Repository\SupplierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,14 +41,14 @@ class SupplierController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $supplier = $form->getData();
             $this->em->persist($supplier);
             $this->em->flush();
 
             return $this->redirectToRoute("home");
         }
-        
+
         return $this->render("supplier/add.html.twig", [
             "form" => $form->createView()
         ]);
@@ -65,7 +66,7 @@ class SupplierController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $newSupplier = $form->getData();
             $this->em->persist($newSupplier);
             $this->em->flush();
@@ -86,7 +87,7 @@ class SupplierController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Supplier::class);
         $supplier = $repository->find($id);
-        foreach($supplier->getMaterials() as $material) {
+        foreach ($supplier->getMaterials() as $material) {
             $supplier->removeMaterial($material);
         }
 
@@ -94,5 +95,17 @@ class SupplierController extends AbstractController
         $this->em->flush();
 
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/suppliers", name="category_list")
+     */
+    public function list(SupplierRepository $supplierRepository)
+    {
+        $suppliers = $supplierRepository->findAll();
+
+        return $this->render('supplier/list.html.twig', [
+            'suppliers' => $suppliers
+        ]);
     }
 }

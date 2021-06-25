@@ -57,7 +57,7 @@ class MaterialController extends AbstractController
             $em->persist($form->getData());
             $em->flush();
 
-            return $this->redirect($request->getUri());
+            return $this->redirectToRoute('material_list');
         }
 
         return $this->render('material/new.html.twig', [
@@ -75,6 +75,18 @@ class MaterialController extends AbstractController
         $em->remove($material);
         $em->flush();
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('material_list');
+    }
+
+    /**
+     * @Route("/materials", name="material_list")
+     */
+    public function list(MaterialRepository $materialRepository)
+    {
+        $materials = $materialRepository->findAll();
+
+        return $this->render('material/list.html.twig', [
+            'materials' => $materials
+        ]);
     }
 }

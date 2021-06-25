@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	Liste des matériaux
+{% endblock %}
+
+{% block body %}
+	<h1>Matériaux</h1>
+
+	<a href="{{ path("new_material") }}" class="btn btn-secondary mb-3">Ajouter un nouveau matériau</a>
+
+	{% for m in materials %}
+		<li>
+			<a href="{{ path('material', {'id': m.id}) }}" class="btn btn-primary mb-2">{{ m.name }}</a>
+		</li>
+	{% endfor %}
+{% endblock %}

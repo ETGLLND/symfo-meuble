@@ -10,7 +10,7 @@
 
 	{% for c in categories %}
 		<li>
-			<a href="{{ path('category', {'id': c.id}) }}" class="btn btn-primary mb-2">{{ c.name }}</a>
+			<a href="{{ path('category', {'id': c.id}) }}" class="btn btn-info mb-2">{{ c.name }}</a>
 		</li>
 	{% endfor %}
 {% endblock %}

@@ -46,7 +46,7 @@ class SupplierController extends AbstractController
             $this->em->persist($supplier);
             $this->em->flush();
 
-            return $this->redirectToRoute("home");
+            return $this->redirectToRoute("supplier_list");
         }
 
         return $this->render("supplier/add.html.twig", [
@@ -94,11 +94,11 @@ class SupplierController extends AbstractController
         $this->em->remove($supplier);
         $this->em->flush();
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('supplier_list');
     }
 
     /**
-     * @Route("/suppliers", name="category_list")
+     * @Route("/suppliers", name="supplier_list")
      */
     public function list(SupplierRepository $supplierRepository)
     {

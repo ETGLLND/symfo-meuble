@@ -4,6 +4,11 @@
 {% endblock %}
 
 {% block body %}
+	<ul class="nav nav-pills">
+		<li class="nav-item">
+			<a class="nav-link" href="#">Retour à la liste des catégories</a>
+		</li>
+	</ul>
 	<h1>{{ category.name }}</h1>
 	<a href="{{ path('edit_category', {'id': category.id}) }}" class="btn btn-success btn-sm ml-1">Modifier</a>
 	<a href="{{ path('delete_category', {'id': category.id}) }}" class="btn btn-danger btn-sm ml-1">Supprimer</a>

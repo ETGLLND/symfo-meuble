@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class LoginTest extends WebTestCase
@@ -21,5 +22,17 @@ class LoginTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertResponseRedirects('/login', 302);
+    }
+
+    public function testVisitingWhileLoggedIn(UserRepository $userRepository)
+    {
+        $client = static::createClient();
+        $testUser = $userRepository->findOneByEmail('admin@mail.com');
+
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/');
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Liste des meubles existants');
     }
 }

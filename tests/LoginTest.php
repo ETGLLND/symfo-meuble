@@ -14,4 +14,12 @@ class LoginTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Se connecter');
     }
+
+    public function testRedirectionToLoginWhenUnlogged(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/');
+
+        $this->assertResponseRedirects('/login', 302);
+    }
 }

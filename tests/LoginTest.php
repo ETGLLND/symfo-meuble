@@ -2,11 +2,20 @@
 
 namespace App\Tests;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class LoginTest extends WebTestCase
 {
+    // private UserRepository $userRepository;
+
+    // protected function setUp(): void
+    // {
+    //     $this->userRepository = static::$container->get(UserRepository::class);
+    // }
+
     public function testLoginPageDisplay(): void
     {
         $client = static::createClient();
@@ -24,9 +33,10 @@ class LoginTest extends WebTestCase
         $this->assertResponseRedirects('/login', 302);
     }
 
-    public function testVisitingWhileLoggedIn(UserRepository $userRepository)
+    public function testVisitingWhileLoggedIn()
     {
         $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('admin@mail.com');
 
         $client->loginUser($testUser);

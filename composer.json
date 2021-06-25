@@ -30,6 +30,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^6.6",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "pestphp/pest": "^1.8",
         "symfony/maker-bundle": "^1.32",

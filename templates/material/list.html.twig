@@ -10,7 +10,7 @@
 
 	{% for m in materials %}
 		<li>
-			<a href="{{ path('material', {'id': m.id}) }}" class="btn btn-primary mb-2">{{ m.name }}</a>
+			<a href="{{ path('material', {'id': m.id}) }}" class="btn btn-light mb-2">{{ m.name }}</a>
 		</li>
 	{% endfor %}
 {% endblock %}

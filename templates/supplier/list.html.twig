@@ -10,7 +10,7 @@
 
 	{% for s in suppliers %}
 		<li>
-			<a href="{{ path('supplier', {'id': s.id}) }}" class="btn btn-primary mb-2">{{ s.name }}</a>
+			<a href="{{ path('supplier', {'id': s.id}) }}" class="btn btn-warning mb-2">{{ s.name }}</a>
 		</li>
 	{% endfor %}
 {% endblock %}

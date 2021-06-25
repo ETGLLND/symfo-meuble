@@ -7,7 +7,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																		           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			{#{{ encore_entry_link_tags('app') }}#}
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -25,6 +25,7 @@
 				<a class="navbar-brand" href="{{ path('home') }}">Accueil</a>
 				<a class="navbar-brand" href="{{ path('category_list') }}">Catégories</a>
 				<a class="navbar-brand" href="{{ path('material_list') }}">Matériaux</a>
+				<a class="navbar-brand" href="{{ path('supplier_list') }}">Fournisseurs</a>
 				<a class="btn btn-outline-danger">Déconnexion</a>
 			</div>
 		</nav>

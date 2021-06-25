@@ -1,17 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Fournisseur - {{ supplier.name }}
+	Fournisseur -
+	{{ supplier.name }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ supplier.name }}</h1>
-    <h2>Productions</h2>
-    <ul>
-        {% for material in supplier.materials %}
-            <li><a href="{{ path('material', {id: material.id}) }}" class="btn btn-light">{{ material.name }}</a></li>
-        {% endfor %}
-    </ul>
-    <a href="{{ path('supplier_edit', {id: supplier.id}) }}" class="btn btn-success">Editer</a>
-    <a href="{{ path('supplier_delete', {id: supplier.id}) }}" class="btn btn-danger">Supprimer</a>
+	<ul class="nav nav-pills">
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('supplier_list') }}">Retour à la liste des fournisseurs</a>
+		</li>
+	</ul>
+	<h1>{{ supplier.name }}</h1>
+	<h2>Productions</h2>
+	<ul>
+		{% for material in supplier.materials %}
+			<li>
+				<a href="{{ path('material', {id: material.id}) }}" class="btn btn-light">{{ material.name }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+	<a href="{{ path('supplier_edit', {id: supplier.id}) }}" class="btn btn-success">Editer</a>
+	<a href="{{ path('supplier_delete', {id: supplier.id}) }}" class="btn btn-danger">Supprimer</a>
 {% endblock %}

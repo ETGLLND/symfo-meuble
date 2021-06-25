@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	Liste des fournisseurs
+{% endblock %}
+
+{% block body %}
+	<h1>Fournisseurs</h1>
+
+	<a href="{{ path("supplier_add") }}" class="btn btn-secondary mb-3">Ajouter un nouveau fournisseur</a>
+
+	{% for s in suppliers %}
+		<li>
+			<a href="{{ path('supplier', {'id': s.id}) }}" class="btn btn-primary mb-2">{{ s.name }}</a>
+		</li>
+	{% endfor %}
+{% endblock %}
